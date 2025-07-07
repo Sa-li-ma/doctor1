@@ -9,32 +9,6 @@ from pydantic import BaseModel
 
 app = FastAPI()
 templates = Jinja2Templates(directory="template")
-#==============================BASIC======================================
-@app.get('/', response_class=HTMLResponse)
-def home(request: Request):
-    context = {
-        "request" : request,
-        "Nom": "N'DIAYE",
-        "Prenom": "Salimata"
-    }
-    return templates.TemplateResponse('home.html', context)
-
-produits = {
-    "1" :"Sac",
-    "2" : "Veste"
-}
-
-
-#==========================================================================
-@app.get('/produit/{id_produit}/')
-def voir_produits(id_produit: str):
-    context = {
-        'produit': produits.get(id_produit, "Produit non trouvé")
-    }
-    return context
-
-
-#===========================================================================
 
 
 model = joblib.load("logistic_model.pkl")
