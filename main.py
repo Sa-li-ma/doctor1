@@ -12,7 +12,7 @@ templates = Jinja2Templates(directory="template")
 
 
 model = joblib.load("logistic_model.pkl")
-# Définir un schéma pour les données d'entrée
+# schéma pour les données d'entrée
 class PatientData(BaseModel):
     age: int
     sex: int
@@ -31,7 +31,7 @@ class PatientData(BaseModel):
 # Route de prédiction
 @app.post("/predict")
 def predict(data: PatientData):
-    # Convertir en DataFrame pour le modèle
+    # Convertion en DataFrame pour le modèle
     input_df = pd.DataFrame([data.dict()])
     prediction = model.predict(input_df)
     return {"prediction": int(prediction[0])}
